@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useTheme } from '@emotion/react';
 import './App.css';
+import Header from './components/Header/Header';
+import { colorPalette } from './theme';
 
 function App() {
+	const theme = useTheme();
+  const colors = colorPalette(theme);
+	
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Start project from here.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+		<div style={{ backgroundColor:colors.black[400],}}>
+			<Header />
     </div>
   );
 }
