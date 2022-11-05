@@ -142,11 +142,12 @@ function Header() {
   return (
 		<Box sx={{
 			flexGrow: 1,
+			height:'10vh',
 			backgroundColor: theme.palette.primary.main,
 			color: theme.palette.primary.contrastText
 		}} >
-      <AppBar position="static" sx={{backgroundColor:'transparent'}}>
-        <Toolbar sx={{backgroundColor:'transparent'}} >
+      <AppBar position="static">
+        <Toolbar>
           <IconButton
             size="large"
             edge="start"

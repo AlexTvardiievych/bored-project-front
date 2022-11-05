@@ -68,7 +68,7 @@ export const colorPalette = (mode: object|string) => ({
 			800: "#a9a9a9",
 			700: "#7d7d7d",
 			600: "#525252",
-			500: "#d4d4d4", //edit
+			500: "#272727", 
 			400: "#1f1f1f",
 			300: "#171717",
 			200: "#101010",

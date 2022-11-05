@@ -1,0 +1,20 @@
+.heroBox{
+	position: relative;
+	height: 90vh;
+	overflow: hidden;
+	outline: 20px;
+	padding: 20px;
+}
+
+.heroBox__contentWrap{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	outline: 1px solid red;
+}
+
+
