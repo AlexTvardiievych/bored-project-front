@@ -1,21 +1,14 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import { BottomNavigation, useTheme } from '@mui/material';
-import {BottomNavigationAction} from '@mui/material';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useTheme } from '@mui/material';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-//import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-//import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -77,13 +70,15 @@ function Header() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
+  const renderMobileMenu = (<>
+		
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'right',
       }}
+			sx={{textAlign:'center'}}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
@@ -93,11 +88,22 @@ function Header() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
 		>
-			
+			<IconButton 
+			sx={{width:'100%', borderRadius:'0'}}
+				onClick={colorMode.toggleColorMode}
+				size="large"
+				aria-label="switch theme"
+				color="inherit">
+					{theme.palette.mode === "dark" ? (
+						<DarkModeIcon />
+					) : (
+						<LightModeIcon />
+					)}
+				</IconButton>
 			
       <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={999} color="error">
+          <Badge badgeContent={value} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
@@ -106,15 +112,17 @@ function Header() {
       <MenuItem>
         <IconButton
           size="large"
-          aria-label="show 17 new notifications"
+          aria-label="show new notifications"
           color="inherit"
         >
-          <Badge badgeContent={999} color="error">
+          <Badge badgeContent={value} color="error">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
 			</MenuItem>
+			
+			
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -128,10 +136,15 @@ function Header() {
         <p>Profile</p>
       </MenuItem>
     </Menu>
-  );
+		</>
+	);
 
   return (
-    <Box sx={{ flexGrow: 1}} >
+		<Box sx={{
+			flexGrow: 1,
+			backgroundColor: theme.palette.primary.main,
+			color: theme.palette.primary.contrastText
+		}} >
       <AppBar position="static" sx={{backgroundColor:'transparent'}}>
         <Toolbar sx={{backgroundColor:'transparent'}} >
           <IconButton
@@ -149,54 +162,36 @@ function Header() {
             variant="h6"
             noWrap
             component="div"
-            //sx={{ display: { xs: 'block', sm: 'block' } }} display hidden 
           >
             LOGO
 					</Typography>
-
-					{/*Top menu*/}
-          {/*<Box sx={{ml:2}} >
-						<BottomNavigation
-							sx={{backgroundColor:'transparent'}}
-        showLabels
-        value={value}
-        onChange={(event, newValue) => {
-          setValue(newValue);
-        }}
-     		 >
-        <BottomNavigationAction sx={{}}  label="Recents" icon={<RestoreIcon />} />
-        <BottomNavigationAction sx={{}} label="Favorites" icon={<FavoriteIcon />} />
-        <BottomNavigationAction sx={{}} label="Nearby" icon={<LocationOnIcon />} />
-    				</BottomNavigation>
-					</Box>*/}
-
-					 {/*toggle theme*/}
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeIcon />
-          ) : (
-            <LightModeIcon />
-          )}
-        </IconButton>
-			
 					
 					{/*options menu*/}
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+					<IconButton onClick={colorMode.toggleColorMode}>
+							{theme.palette.mode === "dark" ? (
+									<Badge><DarkModeIcon /></Badge>
+							) : (
+								<Badge><LightModeIcon /></Badge>
+							)}
+						</IconButton>
+            <IconButton size="large" aria-label="show new mails" color="inherit">
+              <Badge badgeContent={value} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="show new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={value} color="error">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+						</IconButton>
+						
+
             <IconButton
               size="large"
               edge="end"

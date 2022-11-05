@@ -1,16 +1,18 @@
-import { useTheme } from '@emotion/react';
 import './App.css';
 import Header from './components/Header/Header';
-import { colorPalette } from './theme';
+import { ColorModeContext, colorPalette, useMode } from './theme';
+import { ThemeProvider } from '@mui/material/styles';
 
 function App() {
-	const theme = useTheme();
+	const [theme, colorMode]:any = useMode();
   const colors = colorPalette(theme);
 	
-  return (
-		<div style={{ backgroundColor:colors.black[400],}}>
-			<Header />
-    </div>
+	return (
+		<ColorModeContext.Provider value={colorMode}>
+			<ThemeProvider theme={theme}>
+				<Header />
+			</ThemeProvider>
+		</ColorModeContext.Provider>
   );
 }
 
